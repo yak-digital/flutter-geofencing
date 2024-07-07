@@ -1,0 +1,29 @@
+name: yak_geofencing
+description:
+version: 0.0.1
+repository: https://github.com/yak-digital/flutter-yak_geofencing/tree/main/yak_geofencing
+issue_tracker: https://github.com/yak-digital/flutter-yak_geofencing/issues?q=is%3Aissue+is%3Aopen+label%3A%22yak_geofencing%22
+
+environment:
+  sdk: '>=3.4.0 <4.0.0'
+  flutter: ">=3.22.0"
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        default_package: yak_geofencing_android
+      ios:
+        default_package: yak_geofencing_apple
+
+dependencies:
+  flutter:
+    sdk: flutter
+  yak_geofencing_android: 0.0.1
+  yak_geofencing_apple: 0.0.1
+  yak_geofencing_platform_interface: 0.0.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0

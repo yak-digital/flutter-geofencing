@@ -1,0 +1,28 @@
+name: yak_geofencing_apple
+description:
+version: 0.0.1
+repository: https://github.com/yak-digital/flutter-geofencing/tree/main/yak_geofencing_apple
+issue_tracker: https://github.com/yak-digital/flutter-geofencing/issues?q=is%3Aissue+is%3Aopen+label%3A%22yak_geofencing_apple%22
+
+environment:
+  sdk: '>=3.4.0 <4.0.0'
+  flutter: ">=3.22.0"
+
+flutter:
+  plugin:
+    implements: yak_geofencing
+    platforms:
+      ios:
+        pluginClass: GeofencingApplePlugin
+        dartPluginClass: GeofencingApple
+
+dependencies:
+  flutter:
+    sdk: flutter
+  yak_geofencing_platform_interface: 0.0.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  plugin_platform_interface: ^2.1.8
