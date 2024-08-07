@@ -6,22 +6,11 @@ class MonitorHandler: NSObject, FlutterStreamHandler, HandlerProtocol {
     let monitorName = "GeofencingApplePlugin"
     public var monitor: CLMonitor?
     var eventSink: FlutterEventSink?
-    var eventTask: Task<(), Error>?
 
     override init() {
         super.init()
         Task {
             monitor = await CLMonitor(monitorName)
-        }
-    }
-    
-    public func onListen(withArguments arguments: Any?, eventSink events: @escaping FlutterEventSink) -> FlutterError? {
-        if eventSink != nil {
-            return FlutterError(code: Errors.geofencingSubscriptionActive, message: Errors.geofencingSubscriptionActiveMessage, details: nil);
-        }
-        
-        eventSink = events
-        eventTask = Task {
             for try await event: CLMonitor.Events.Element in await monitor!.events {
                 guard eventSink == nil else {
                     let condition = await self.monitor!.record(for: event.identifier)?.condition as! CLMonitor.CircularGeographicCondition
@@ -29,7 +18,6 @@ class MonitorHandler: NSObject, FlutterStreamHandler, HandlerProtocol {
                     var dict: [String: Any] = [
                         "region": region.toMap(),
                     ];
-                    
                     switch (event.state) {
                         case .satisfied:
                             dict["type"] = "enter"
@@ -50,11 +38,18 @@ class MonitorHandler: NSObject, FlutterStreamHandler, HandlerProtocol {
                 }
             }
         }
+    }
+    
+    public func onListen(withArguments arguments: Any?, eventSink events: @escaping FlutterEventSink) -> FlutterError? {
+        if eventSink != nil {
+            return FlutterError(code: Errors.geofencingSubscriptionActive, message: Errors.geofencingSubscriptionActiveMessage, details: nil);
+        }
+        
+        eventSink = events
         return nil
     }
 
     public func onCancel(withArguments arguments: Any?) -> FlutterError? {
-        eventTask?.cancel()
         eventSink = nil
         return nil
     }
