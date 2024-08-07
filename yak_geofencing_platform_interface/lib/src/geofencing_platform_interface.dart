@@ -4,7 +4,7 @@ import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'implementations/method_channel_geofencing.dart';
 import 'models/region.dart';
-import 'models/region_event.dart';
+import 'models/geofencing_event.dart';
 
 typedef RegionChangedHandler = void Function(Region region);
 
@@ -22,7 +22,7 @@ abstract class GeofencingPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  Stream<RegionEvent> getMonitorStream() {
+  Stream<GeofencingEvent> getMonitorStream() {
     throw UnimplementedError(
       'getMonitorStream() has not been implemented.',
     );

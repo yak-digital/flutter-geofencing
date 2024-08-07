@@ -1,2 +1,2 @@
 export 'region.dart';
-export 'region_event.dart';
+export 'geofencing_event.dart';

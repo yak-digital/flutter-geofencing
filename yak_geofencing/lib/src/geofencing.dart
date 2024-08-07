@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:yak_geofencing_platform_interface/yak_geofencing_platform_interface.dart';
 
 class Geofencing {
-  static Stream<RegionEvent> getMonitorStream() =>
+  static Stream<GeofencingEvent> getMonitorStream() =>
       GeofencingPlatform.instance.getMonitorStream();
 
   static Future<bool> isRegionMonitoringAvailable() =>

@@ -13,18 +13,18 @@ class GeofencingAndroid extends GeofencingPlatform {
     GeofencingPlatform.instance = GeofencingAndroid();
   }
 
-  Stream<RegionEvent>? _monitorStream;
+  Stream<GeofencingEvent>? _monitorStream;
 
   @override
-  Stream<RegionEvent> getMonitorStream() {
+  Stream<GeofencingEvent> getMonitorStream() {
     if (_monitorStream != null) {
       return _monitorStream!;
     }
     var originalStream = _monitorChannel.receiveBroadcastStream();
     var monitorStream = _wrapStream(originalStream);
 
-    _monitorStream = monitorStream.map<RegionEvent>((dynamic element) {
-      return RegionEvent.fromMap(element);
+    _monitorStream = monitorStream.map<GeofencingEvent>((dynamic element) {
+      return GeofencingEvent.fromMap(element);
     }).handleError(
       (error) {
         if (error is PlatformException) {

@@ -2,13 +2,13 @@ import '../enums/event_type.dart';
 
 import 'region.dart';
 
-class RegionEvent {
+class GeofencingEvent {
   final Region region;
   final RegionEventType type;
 
-  RegionEvent(this.region, this.type);
+  GeofencingEvent(this.region, this.type);
 
-  static RegionEvent fromMap(dynamic message) {
+  static GeofencingEvent fromMap(dynamic message) {
     final Map<dynamic, dynamic> regionEventMap = message;
 
     if (!regionEventMap.containsKey('region')) {
@@ -21,7 +21,7 @@ class RegionEvent {
           'The supplied map doesn\'t contain the mandatory key `type`.');
     }
 
-    return RegionEvent(
+    return GeofencingEvent(
       Region.fromMap(regionEventMap['region']),
       RegionEventType.fromString(regionEventMap['type']),
     );
@@ -30,7 +30,7 @@ class RegionEvent {
   @override
   bool operator ==(Object other) {
     var areEqual =
-        other is RegionEvent && other.region == region && other.type == type;
+        other is GeofencingEvent && other.region == region && other.type == type;
 
     return areEqual;
   }
